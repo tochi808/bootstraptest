@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  div(class="container")
-    h1= title
-    p Welcome to #{title}
+  div(class="container-fluid")
+    div(class="row-fluid")
+      div(class="span3")
+        | hello
+      div(class="span6")
+        | world 
 
   script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
   != js('bootstrap')
