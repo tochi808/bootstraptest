@@ -5,7 +5,9 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , http = require('http');
+  , http = require('http')
+  , assets = require('connect-assets')
+  ;
 
 var app = express();
 
@@ -19,6 +21,9 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+
+  app.use();
+
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
