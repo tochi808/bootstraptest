@@ -3,15 +3,27 @@ html
   head
     title= title
     != css('bootstrap')
+    != css('application')
+    
   body
-
-    div(class="navbar")
+    div(class="navbar navbar-fixed-top")
       div(class="navbar-inner")
-        a(class="brand") Bootstrap Test
-        ul(class="nav")
-          li(class="active")
-            a(href="#") Home
-          li
-            a(href="#") News
+        div(class="container")
+          a(class="brand") Bootstrap Test
+          ul(class="nav")
+            li(class="active")
+              a(href="/") Home
+            li
+              a(href="/news") News
 
     block content
+
+    div(class="navbar-fixed-bottom")
+      div(class="container")
+        p(class="muted credit")
+          | This is test
+
+    script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+    != js('bootstrap')
+    != js('application')
+

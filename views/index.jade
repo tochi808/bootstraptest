@@ -1,12 +1,22 @@
 extends layout
 
 block content
-  div(class="container-fluid")
-    div(class="row-fluid")
-      div(class="span3")
-        | hello
-      div(class="span6")
-        | world 
-
-  script(type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
-  != js('bootstrap')
+  div(id="wrap")
+    div(class="container-fluid")
+      div(class="row-fluid")
+        div(class="span3")
+          form
+            div
+              select(name="hoge")
+                option hoo
+                option bar
+            div
+              input(type="submit", class="btn btn-primary")
+        div(class="span6")
+          div(class="dropdown")
+            a(class="dropdown-toggle")
+              button(class="btn") 
+                | hoge
+                b(class="caret")
+            ul(class="dropdown-menu")
+              li goo
