@@ -21,7 +21,6 @@ app.configure ->
   app.use express.session()
   app.use assets()
   app.use app.router
-  #app.use express.static(__dirname + "/public")
   app.use express.static( path.join(__dirname, "assets") )
 
 app.configure "development", ->
