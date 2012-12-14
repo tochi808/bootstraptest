@@ -27,9 +27,7 @@ app.configure "development", ->
   app.use express.errorHandler()
 
 app.get "/", routes.index
-app.get "/news", (req, res) ->
-  res.render "news",
-    title: "news"
+app.get "/new", routes.new
 
 
 http.createServer(app).listen app.get("port"), ->
