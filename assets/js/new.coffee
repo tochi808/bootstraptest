@@ -22,7 +22,7 @@ jQuery.validator.addMethod("filesize", (value, element, params)->
     flag = true 
     self = this
     _.each element.files, (file)->
-      if file.size 100000000
+      if file.size > 100000000
         flag = false 
         return false
 
