@@ -11,10 +11,7 @@ block content
           div(class="control-group")
             label(class="control-label") ファイル 
             div(class="controls")
-              input(type="text", disabled=true, class="dummy-file-input", name="dummy-file-input")
-              button(type="button", class="btn", onclick="$('.file-input').click()")
-                | 選択
-              input(type="file", name="upload", multiple=true, style="display:none", class="file-input")
+              input(type="file", name="test", class="file-input")
 
           div(class="control-group")
             label(class="control-label") 説明
@@ -24,6 +21,7 @@ block content
           div(class="control-group")
             div(class="controls")
               input(type="submit", class="btn btn-primary", value="アップロード")
+              input(type="reset", class="btn", value="reset")
 
       div(class="span6")
         div(class="preview-area")

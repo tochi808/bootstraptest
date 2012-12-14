@@ -1,4 +1,4 @@
-#= require lib/underscore lib/jquery.validate
+#= require lib/underscore lib/jquery.validate lib/additional-methods
 preview_area = $('.preview-area')
 
 $('.file-input').bind 'change', (evt)->
@@ -18,8 +18,34 @@ $('.file-input').bind 'change', (evt)->
 
   $('.dummy-file-input').val names.join(',')
 
+jQuery.validator.addMethod("filesize", (value, element, params)->
+    flag = true 
+    self = this
+    _.each element.files, (file)->
+      if file.size 100000000
+        flag = false 
+        return false
+
+    return flag 
+
+, "サイズが大きすぎます" 
+)
+
 $('form.upload-form').validate
   rules:
-    description: 'required'
+    test: 
+      required: true
+      filesize: true 
+      accept: "gif"
+
+    description:
+      required: true
+
+  messages:
+    test:
+      required: "必須項目です"
 
   errorClass: "alert alert-error"
+
+
+
