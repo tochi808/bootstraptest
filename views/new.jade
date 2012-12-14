@@ -3,26 +3,31 @@ extends layout
 block content
 
   div(class="new-form")
-    form(class="form-horizontal", method="post", action="/")
+    h4 Upload Form
+    div(class="row")
+      div(class="span6")
+        form(class="upload-form form-horizontal", method="post", action="/", enctype="multipart/form-data")
 
-      div(class="control-group")
-        label(class="control-label") ファイル 
-        div(class="controls")
-          input(type="text", disabled=true, class="dummy-file-input")
-          button(type="button", class="btn", onclick="$('.file-input').click()")
-            | 選択
-          input(type="file", multiple=true, style="display:none", class="file-input")
-          div(class="preview-area")
+          div(class="control-group")
+            label(class="control-label") ファイル 
+            div(class="controls")
+              input(type="text", disabled=true, class="dummy-file-input", name="dummy-file-input")
+              button(type="button", class="btn", onclick="$('.file-input').click()")
+                | 選択
+              input(type="file", name="upload", multiple=true, style="display:none", class="file-input")
 
-      div(class="control-group")
-        label(class="control-label") 説明
-        div(class="controls")
-          textarea
+          div(class="control-group")
+            label(class="control-label") 説明
+            div(class="controls")
+              textarea(name="description")
 
-      div(class="control-group")
-        div(class="controls")
-          input(type="submit", class="btn", value="アップロード")
+          div(class="control-group")
+            div(class="controls")
+              input(type="submit", class="btn btn-primary", value="アップロード")
+
+      div(class="span6")
+        div(class="preview-area")
 
   != js('lib/jquery-1.8.3.js')
   != js('lib/bootstrap')
-  != js('application')
+  != js('new')
