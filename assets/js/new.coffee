@@ -18,34 +18,40 @@ $('.file-input').bind 'change', (evt)->
 
   $('.dummy-file-input').val names.join(',')
 
-jQuery.validator.addMethod("filesize", (value, element, params)->
-    flag = true 
-    self = this
-    _.each element.files, (file)->
-      if file.size > 100000000
-        flag = false 
-        return false
 
-    return flag 
 
-, "サイズが大きすぎます" 
+$.validator.addMethod(
+  "fileSize",
+  (value, element ,maximum)->
+    console.log(element.files[0].size)
+    return element.files[0].size < maximum
+  ,"ファイルサイズ大きすぎます。"
 )
 
-$('form.upload-form').validate
+$(".upload-form").validate(
   rules:
-    test: 
-      required: true
-      filesize: true 
-      accept: "gif"
-
     description:
       required: true
+      minlength: 3
+    
+    email:
+      email: true
+
+    "up-file":
+      required: true
+      accept: "gif|jpg|png"
+      fileSize: 50000 
 
   messages:
-    test:
-      required: "必須項目です"
+    description:
+      required: "必須項目です。"
+      minlength: "3文字以上、入力してください。"
+
+    "up-file":
+      accept: "拡張子はgif,jpgまたはpngを指定してくだい。"
+      fileSize: "5000byteよりも大きいサイズのファイルはアップロードできません。"
+
+
 
   errorClass: "alert alert-error"
-
-
-
+)
