@@ -1,28 +1,28 @@
 #= require lib/underscore lib/jquery.validate lib/additional-methods
 
 $(".file-input").bind("change",(evt)->
-  console.log  evt.target.files[0].type
+  $(".preview-area").html("");
 
-  if(evt.target.files[0].type.substring(0,5) != "image")
-    console.log "imgでない"
-    return
-  
-  reader= new FileReader()
+  $.each(evt.target.files,
+    (idx, file)->
+      if(file.type.substring(0,5) != "image")
+        return false
 
-  #コールバックとしてreadAsDataURLが完了した後に呼ばれる。
-  $(reader).bind("load",(evt)->
-    
-    $(".preview-area").html($("<img>").attr(src:evt.target.result))
+      reader= new FileReader()
 
+      #コールバックとしてreadAsDataURLが完了した後に呼ばれる。
+      $(reader).bind("load",(evt)->
+        $(".preview-area").append($("<img>").attr(
+          src: evt.target.result
+          width: "100px"
+          height:"100px"
+        ))
+
+      )
+      #終わるのと同時にonloadというイベントが発生する。
+      reader.readAsDataURL(file)
   )
-
-  #終わるのと同時にonloadというイベントが発生する。
-  reader.readAsDataURL(evt.target.files[0])
-  
-  console.log "test"
-
 )
-
 
 $.validator.addMethod(
   "fileSize",
@@ -44,7 +44,7 @@ $(".upload-form").validate(
     "up-file":
       required: true
       accept: "gif|jpg|png"
-      fileSize: 50000 
+      fileSize: 5000 
 
   messages:
     description:
@@ -54,8 +54,6 @@ $(".upload-form").validate(
     "up-file":
       accept: "拡張子はgif,jpgまたはpngを指定してくだい。"
       fileSize: "5000byteよりも大きいサイズのファイルはアップロードできません。"
-
-
 
   errorClass: "alert alert-error"
 )
