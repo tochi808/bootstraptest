@@ -11,7 +11,7 @@ block content
           div(class="control-group")
             label(class="control-label") ファイル 
             div(class="controls")
-              input(type="file", name="up-file", class="file-input")
+              input(type="file", name="up-file", class="file-input",multiple="true")
 
           div(class="control-group")
             label(class="control-label") 説明
@@ -30,6 +30,7 @@ block content
 
       div(class="span6")
         div(class="preview-area")
+
 
   != js('lib/jquery-1.8.3.js')
   != js('lib/bootstrap')

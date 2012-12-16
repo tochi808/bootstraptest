@@ -1,23 +1,27 @@
 #= require lib/underscore lib/jquery.validate lib/additional-methods
-preview_area = $('.preview-area')
 
-$('.file-input').bind 'change', (evt)->
-  preview_area.html('')
-  names = []
+$(".file-input").bind("change",(evt)->
+  console.log  evt.target.files[0].type
 
-  _.each evt.target.files, (file)->
+  if(evt.target.files[0].type.substring(0,5) != "image")
+    console.log "imgでない"
+    return
+  
+  reader= new FileReader()
 
-    reader = new FileReader()
-    $(reader).bind 'load', (evt)->
-      preview_area.append $('<img>').attr
-          src: evt.target.result
-          style: 'width: 100px;'
+  #コールバックとしてreadAsDataURLが完了した後に呼ばれる。
+  $(reader).bind("load",(evt)->
+    
+    $(".preview-area").html($("<img>").attr(src:evt.target.result))
 
-    names.push(file.name)
-    reader.readAsDataURL(file)
+  )
 
-  $('.dummy-file-input').val names.join(',')
+  #終わるのと同時にonloadというイベントが発生する。
+  reader.readAsDataURL(evt.target.files[0])
+  
+  console.log "test"
 
+)
 
 
 $.validator.addMethod(
